@@ -20,7 +20,6 @@ The goals / steps of this project are the following:
 [image4]: ./output_images/sliding_window.png
 [image5]: ./output_images/pipeline.png
 [image6]: ./output_images/example_output.png
-[video1]: ./project_video.mp4
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/513/view) Points
 ###Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
@@ -28,7 +27,7 @@ The goals / steps of this project are the following:
 ---
 ###Writeup / README
 
-####1. Provide a Writeup / README that includes all the rubric points and how you addressed each one.  You can submit your writeup as markdown or pdf.  [Here](https://github.com/udacity/CarND-Vehicle-Detection/blob/master/writeup_template.md) is a template writeup for this project you can use as a guide and a starting point.  
+####1. Provide a Writeup / README that includes all the rubric points and how you addressed each one.    
 
 This is the README for this project
 
@@ -48,9 +47,11 @@ I explored different color spaces and different `skimage.hog()` parameters (`ori
 Here is an example using the `YUV` color space and HOG parameters of `orientations=9`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
 
 
-
+***HOG for Car images***
 ![alt text][image2]
 
+
+***HOG for Non Car images***
 
 ![alt text][image3]
 
@@ -71,7 +72,7 @@ I tried various combinations of parameters and I found that good combination of 
 
 ####3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
-I trained a linear SVM using ***LinearSVC*** from `sklearn`, I used the HOG features obtained in the previous step, I also include color features, which produced 14,244 features. I shuffled and splitted the data on a training set and a test set using `train_test_split` and after training my classifier I obtained a ***Test Accuracy of 0.9825***
+I trained a linear SVM using ***LinearSVC*** from `sklearn`, I used the HOG features obtained in the previous step, I also included color features, which produced 14,244 features. I shuffled and splitted the data on a training set and a test set using `train_test_split` and after training my classifier I obtained a ***Test Accuracy of 0.9825***
 
 The code for this section can be found in the code cell #11 of the IPython notebook `Test.ipynb`
 
@@ -102,14 +103,14 @@ Ultimately I searched on two scales of windows, using YUV 1-channel HOG features
 ### Video Implementation
 
 ####1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
-Here's a [link to my video result](./project_video.mp4)
+Here's a [link to my video result](https://youtu.be/0-LkvLX9XNU)
 
 
 ####2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
 
-I created a class to keep track of the cars found. Once I had all the windows detected as positive cars, I iterated over the list of windows and if one of the windows was already on the list of cars, then I merge this new window and calculate the new position of the car.
+I created a class to keep track of the cars found. Once I had all the windows detected as positive cars, I iterated over the list of windows and if one of the windows was already on the list of cars, then I merged this new window and calculated the new position of the car.
 
-Then I checked if the difference between the current frame and the frame where the windows was captured is less than 3 then I'll keep it since I'm pretty sure it was a car and not a false positive. Finally, I checked again the resultant windows to check if the there were still windows that belong to the same car and merged them.
+Then I checked if the difference between the current frame and the frame where the windows was captured is less than 3 then I'll keep it since I'm pretty sure it was a car and not a false positive. Finally, I checked again the resultant windows to check if the there were still windows that belonged to the same car and merged them.
 
 The code for this section can be found in the code cell #15 from lines 35 to 84 of the IPython notebook `Test.ipynb`
 
