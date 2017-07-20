@@ -24,15 +24,15 @@ The goals / steps of this project are the following:
 ###Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
 
 ---
-###Writeup / README
+### Writeup / README
 
-####1. Provide a Writeup / README that includes all the rubric points and how you addressed each one.    
+#### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one.    
 
 This is the README for this project
 
-###Histogram of Oriented Gradients (HOG)
+### Histogram of Oriented Gradients (HOG)
 
-####1. Explain how (and identify where in your code) you extracted HOG features from the training images.
+#### 1. Explain how (and identify where in your code) you extracted HOG features from the training images.
 
 The code for this step is contained in the code cell #10 of the IPython notebook `Test.ipynb`
 
@@ -55,7 +55,7 @@ Here is an example using the `YUV` color space and HOG parameters of `orientatio
 ![alt text][image3]
 
 
-####2. Explain how you settled on your final choice of HOG parameters.
+#### 2. Explain how you settled on your final choice of HOG parameters.
 
 I tried various combinations of parameters and I found that good combination of HOG parameters was the following:
 
@@ -69,15 +69,15 @@ I tried various combinations of parameters and I found that good combination of 
 | Channel          | 0       |
 
 
-####3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
+#### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
 I trained a linear SVM using ***LinearSVC*** from `sklearn`, I used the HOG features obtained in the previous step, I also included color features, which produced 14,244 features. I shuffled and splitted the data on a training set and a test set using `train_test_split` and after training my classifier I obtained a ***Test Accuracy of 0.9825***
 
 The code for this section can be found in the code cell #11 of the IPython notebook `Test.ipynb`
 
-###Sliding Window Search
+### Sliding Window Search
 
-####1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
+#### 1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
 
 I decided to create windows of 2 different sizes, the following table with explain the ranges and sizes for the windows.
 
@@ -92,7 +92,7 @@ The code for this section can be found in the code cell #15 on lines 15 to 24 of
 ![alt text][image4]
 
 
-####2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to try to minimize false positives and reliably detect cars?
+#### 2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to try to minimize false positives and reliably detect cars?
 
 Finally I searched on two scales of windows, using YUV 1-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
 
@@ -101,11 +101,11 @@ Finally I searched on two scales of windows, using YUV 1-channel HOG features pl
 
 ### Video Implementation
 
-####1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
+#### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
 Here's a [link to my video result](https://youtu.be/0-LkvLX9XNU)
 
 
-####2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
+#### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
 
 I created a class to keep track of the cars found. Once I had all the windows detected as positive cars, I iterated over the list of windows and if one of the windows was already on the list of cars, then I merged this new window and calculated the new position of the car.
 
@@ -118,6 +118,6 @@ The code for this section can be found in the code cell #15 from lines 35 to 84 
 
 ###Discussion
 
-####1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
+#### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-I had problems stabilish where to draw the windows, the correct size, I did a lot of experimentation on this, but finally I found a good combination I think. I think the use of a class to keep track of the bounding boxes that were carsworked very well
+I had problems determining where to draw the windows, the correct size, I did a lot of experimentation on this, but finally I found a good combination I think. I think the use of a class to keep track of the bounding boxes that were carsworked very well
