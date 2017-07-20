@@ -112,7 +112,7 @@ The code for this section can be found in the code cell #15 from lines 35 to 84 
 
 ---
 
-###Discussion
+### Discussion
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
